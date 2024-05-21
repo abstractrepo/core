@@ -1,14 +1,17 @@
-import { ProjectType } from ".";
-
-interface Config {
+export interface Config<TProjectLayout extends Record<string, string>> {
   tags: string[];
   entry: "package.json" | (string & {});
   name: string;
-  type: keyof ProjectType;
+  type: keyof TProjectLayout;
 }
 
-export default async function defineProjectConfig(
-  config: Config | (() => Config) | (() => Promise<Config>)
+export default async function defineProjectConfig<
+  TProjectLayout extends Record<string, string>
+>(
+  config:
+    | Config<TProjectLayout>
+    | (() => Config<TProjectLayout>)
+    | (() => Promise<Config<TProjectLayout>>)
 ) {
   if (typeof config === "function") {
     const _config = await Promise.resolve(config());
