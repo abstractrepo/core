@@ -1,8 +1,8 @@
-export { default as defineProjectConfig } from "./project";
-export { default as defineRootConfig } from "./root";
-export { default as defineTemplateConfig } from "./template";
+export {
+  default as defineProjectConfig,
+  type Config as ProjectConfig,
+} from "./project";
 
-/**
- * for type-safe purpose
- */
-export interface ProjectType {}
+export { default as defineRootConfig, type Config as RootConfig } from "./root";
+
+export { default as defineTemplateConfig } from "./template";
