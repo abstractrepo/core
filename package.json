@@ -1,0 +1,40 @@
+{
+  "name": "abstractrepo",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "an monorepo that not compete with other",
+  "scripts": {
+    "test": "vitest",
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "prepublish": "npm run build"
+  },
+  "files": [
+    "dist",
+    "package.json",
+    "README.md",
+    "LICENSE.md"
+  ],
+  "exports": {
+    ".": {
+      "default": "./dist/index.js",
+      "import": "./dist/index.js",
+      "node": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "tslib": "^2.6.2",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  },
+  "keywords": [
+    "abstract-repo",
+    "monorepo"
+  ],
+  "author": "SH8GH<samkimhout@gmail.com>",
+  "license": "ISC"
+}
