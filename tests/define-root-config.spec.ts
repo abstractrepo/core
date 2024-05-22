@@ -1,25 +1,34 @@
-import { defineRootConfig } from "../src";
-
-const root = defineRootConfig({
-  basePath: import.meta.dirname,
-
-  organize: "abstract",
-});
+import { RootConfig, defineRootConfig } from "../src";
 
 describe("test: `defineRootConfig` should all pass", async () => {
-  it("expect: root has basePath key", async () => {
-    expect("basePath" in root).toBe(true);
+  it("expect: `root.basePath` is `required`", () => {
+    expect(() => defineRootConfig({} as RootConfig)).toThrowError(
+      "E_CANNOT_FIND_BASE_PATH: cannot find basepath"
+    );
   });
 
-  it("expect: `root.basePath` equal `import.meta.dirname`", async () => {
-    expect(root.basePath).toBe(import.meta.dirname);
+  it("expect: `root.basePath` is type `string`", () => {
+    const root = defineRootConfig({
+      basePath: import.meta.dirname,
+    });
+
+    expectTypeOf(root.basePath).toBeString();
   });
 
-  it("expect: root has organize key", async () => {
-    expect("organize" in root).toBe(true);
+  it("expect: `root` has `organize` type `undefined` if not pass", () => {
+    const root = defineRootConfig({
+      basePath: import.meta.dirname,
+    });
+
+    expectTypeOf(root.organize).toBeUndefined;
   });
 
-  it("expect: `root.organize` type string", async () => {
-    expectTypeOf<string | undefined>(root.organize).toBeString();
+  it("expect: `root` has `organize` type `string` if pass", () => {
+    const root = defineRootConfig({
+      basePath: import.meta.dirname,
+      organize: "abstract",
+    });
+
+    expectTypeOf(root.organize).toBeString;
   });
 });
