@@ -3,10 +3,8 @@ export interface RootConfig {
    * @description
    *
    * for using `<base_path>/[anything]` in `config.repoLayouts`
-   *
-   * @default import.meta.dirname
    */
-  basePath?: string;
+  basePath: string;
 
   /**
    * @description
