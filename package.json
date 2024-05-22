@@ -4,7 +4,7 @@
   "type": "module",
   "description": "an monorepo that not compete with other",
   "scripts": {
-    "test": "vitest",
+    "test": "vitest --typecheck",
     "dev": "tsup --watch",
     "build": "tsup",
     "prepublishOnly": "npm run build"
