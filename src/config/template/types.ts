@@ -1,7 +1,4 @@
-import {
-  type GlobalProgrammingType,
-  type GlobalRuntimeType,
-} from "../../global";
+import { GlobalProgrammingType } from "../../global";
 
 export interface TemplateConfigCommand {
   name: string;
@@ -17,8 +14,7 @@ export interface TemplateConfigInstallationPackage {
 export interface TemplateConfig<
   TProgramming extends keyof GlobalProgrammingType,
   TRuntime extends GlobalProgrammingType[TProgramming],
-  CatchPackageManager extends GlobalRuntimeType[TRuntime],
-  TPackageManager extends CatchPackageManager
+  TPackageManager extends GlobalProgrammingType[TProgramming]
 > {
   /**
    * @description
