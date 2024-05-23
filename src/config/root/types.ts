@@ -1,4 +1,4 @@
-export interface RootConfig {
+export interface RootConfig<TLayouts extends Record<string, string> = {}> {
   /**
    * @description
    *
@@ -16,4 +16,13 @@ export interface RootConfig {
    * @default undefined
    */
   organize?: string;
+
+  /**
+   * @description
+   *
+   * an monorepo layouts you want to specified
+   *
+   * @default {}
+   */
+  layouts?: TLayouts;
 }
