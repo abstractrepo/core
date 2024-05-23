@@ -1,6 +1,6 @@
 {
   "name": "abstractrepo",
-  "version": "0.0.0-alpha-5",
+  "version": "0.0.0-alpha-6",
   "type": "module",
   "description": "an monorepo that not compete with other",
   "scripts": {
