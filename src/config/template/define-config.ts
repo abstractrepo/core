@@ -1,4 +1,3 @@
-import { defineRootConfig, type RootConfig } from "../../index";
 import { GlobalProgrammingType } from "../../global";
 import { TemplateConfig } from "./types";
 
