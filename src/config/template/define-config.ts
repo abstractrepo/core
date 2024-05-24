@@ -3,8 +3,8 @@ import { TemplateConfig } from "./types";
 
 export default function defineTemplateConfig<
   TProgramming extends keyof GlobalProgrammingType,
-  TRuntime extends GlobalProgrammingType[TProgramming],
-  TPackageManager extends GlobalProgrammingType[TProgramming]
+  TRuntime extends keyof GlobalProgrammingType[TProgramming],
+  TPackageManager extends GlobalProgrammingType[TProgramming][TRuntime]
 >(TemplateConfig: TemplateConfig<TProgramming, TRuntime, TPackageManager>) {
   return TemplateConfig;
 }

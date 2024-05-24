@@ -13,8 +13,8 @@ export interface TemplateConfigInstallationPackage {
 
 export interface TemplateConfig<
   TProgramming extends keyof GlobalProgrammingType,
-  TRuntime extends GlobalProgrammingType[TProgramming],
-  TPackageManager extends GlobalProgrammingType[TProgramming]
+  TRuntime extends keyof GlobalProgrammingType[TProgramming],
+  TPackageManager extends GlobalProgrammingType[TProgramming][TRuntime]
 > {
   /**
    * @description
