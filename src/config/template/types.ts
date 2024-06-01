@@ -1,14 +1,3 @@
-export interface TemplateConfigCommand {
-  name: string;
-  bash: string;
-}
-
-export interface TemplateConfigInstallationPackage {
-  package: string;
-  version: string;
-  type: "dependencies" | "devDependencies";
-}
-
 export interface TemplateConfig {
   /**
    * @description
@@ -18,7 +7,7 @@ export interface TemplateConfig {
    *
    * @requires
    */
-  templateCanBeType: string | string[];
+  templateCanBeType: string[];
 
   /**
    * @description
@@ -27,14 +16,5 @@ export interface TemplateConfig {
    *
    * @default []
    */
-  tags?: string[];
-
-  /**
-   * @description
-   *
-   * an location that let you put package that need install during installation
-   *
-   * @default []
-   */
-  install?: TemplateConfigInstallationPackage[];
+  templateCanBeTag?: string[];
 }
