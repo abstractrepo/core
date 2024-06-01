@@ -36,5 +36,8 @@
     "monorepo"
   ],
   "author": "SH8GH<samkimhout@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "enquirer": "^2.4.1"
+  }
 }
