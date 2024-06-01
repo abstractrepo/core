@@ -5,3 +5,11 @@ export function withFallback<T>(main: T | undefined, fallback: T) {
 
   return main;
 }
+
+export function toArray<T>(contain: T | T[]) {
+  if (!Array.isArray(contain)) {
+    return [contain];
+  }
+
+  return [...contain];
+}
