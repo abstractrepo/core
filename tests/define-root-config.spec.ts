@@ -15,6 +15,14 @@ describe("test: `defineRootConfig` should all pass", async () => {
     expectTypeOf(root.baseRootPath).toBeString();
   });
 
+  it("expect: `root.baseRootPath` is equal `import.meta.dirname`", () => {
+    const root = defineRootConfig({
+      basePath: import.meta.dirname,
+    });
+
+    expect(root.baseRootPath).toBe(import.meta.dirname);
+  });
+
   it("expect: `root` has `getOrganizeName` type `undefined` if not pass", () => {
     const root = defineRootConfig({
       basePath: import.meta.dirname,
