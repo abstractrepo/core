@@ -1,3 +1,4 @@
+import { toArray, withFallback } from "../../utils";
 import { RootConfig, TagInfo } from "./types";
 
 export default class RootHelper<
@@ -9,10 +10,7 @@ export default class RootHelper<
   constructor(raw: RootConfig<TLayouts, TTags>) {
     const config: RootConfig<TLayouts> = {
       basePath: raw.basePath,
-      layouts:
-        typeof raw.layouts !== "undefined"
-          ? ({ ...raw.layouts } as TLayouts)
-          : ({} as TLayouts),
+      layouts: withFallback(raw.layouts, {} as TLayouts),
       organize: undefined,
     };
 
@@ -56,9 +54,7 @@ export default class RootHelper<
   getLayouts<TLayoutsKey extends keyof TLayouts>(
     projectType: TLayoutsKey | TLayoutsKey[]
   ): TLayoutsKey[] {
-    return typeof projectType === "string"
-      ? ([projectType] as TLayoutsKey[])
-      : (projectType as TLayoutsKey[]);
+    return toArray(projectType);
   }
 
   /**
@@ -69,9 +65,7 @@ export default class RootHelper<
   getTags<TTagsKey extends keyof TTags>(
     projectTag: TTagsKey | TTagsKey[]
   ): TTagsKey[] {
-    return typeof projectTag === "string"
-      ? ([projectTag] as TTagsKey[])
-      : (projectTag as TTagsKey[]);
+    return toArray(projectTag);
   }
 
   /**
