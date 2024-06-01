@@ -56,7 +56,20 @@ export default class RootHelper<
   getLayouts<TLayoutsKey extends keyof TLayouts>(
     projectType: TLayoutsKey | TLayoutsKey[]
   ) {
-    return projectType;
+    return typeof projectType === "string"
+      ? [projectType as TLayoutsKey]
+      : projectType;
+  }
+
+  /**
+   * @description
+   *
+   * let you spcified tags key that you define in root config
+   */
+  getTags<TTagsKey extends keyof TTags>(projectTag: TTagsKey | TTagsKey[]) {
+    return typeof projectTag === "string"
+      ? [projectTag as TTagsKey]
+      : projectTag;
   }
 
   /**
