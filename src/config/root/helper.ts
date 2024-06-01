@@ -1,9 +1,12 @@
-import { RootConfig } from "./types";
+import { RootConfig, TagInfo } from "./types";
 
-export default class RootHelper<TLayouts extends Record<string, string>> {
+export default class RootHelper<
+  TLayouts extends Record<string, string>,
+  TTags extends Record<string, TagInfo>
+> {
   #raw: RootConfig<TLayouts>;
 
-  constructor(raw: RootConfig<TLayouts>) {
+  constructor(raw: RootConfig<TLayouts, TTags>) {
     const config: RootConfig<TLayouts> = {
       basePath: raw.basePath,
       layouts:
@@ -21,21 +24,19 @@ export default class RootHelper<TLayouts extends Record<string, string>> {
   /**
    * @description
    *
-   * for check if raw values for test
-   *
-   * @external
+   * check is monorepo using organize
    */
-  get raw() {
-    return this.#raw;
+  get isUseOrganize() {
+    return typeof this.#raw.organize === "string";
   }
 
   /**
    * @description
    *
-   * check is monorepo using organize
+   * get layouts object
    */
-  get isUseOrganize() {
-    return typeof this.#raw.organize === "string";
+  get getLayoutObject() {
+    return this.#raw.layouts;
   }
 
   /**
@@ -55,7 +56,20 @@ export default class RootHelper<TLayouts extends Record<string, string>> {
   getLayouts<TLayoutsKey extends keyof TLayouts>(
     projectType: TLayoutsKey | TLayoutsKey[]
   ) {
-    return projectType;
+    return typeof projectType === "string"
+      ? [projectType as TLayoutsKey]
+      : projectType;
+  }
+
+  /**
+   * @description
+   *
+   * let you spcified tags key that you define in root config
+   */
+  getTags<TTagsKey extends keyof TTags>(projectTag: TTagsKey | TTagsKey[]) {
+    return typeof projectTag === "string"
+      ? [projectTag as TTagsKey]
+      : projectTag;
   }
 
   /**

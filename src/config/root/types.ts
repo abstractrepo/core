@@ -1,4 +1,12 @@
-export interface RootConfig<TLayouts extends Record<string, string> = {}> {
+export interface TagInfo {
+  description: string;
+  docs: string;
+}
+
+export interface RootConfig<
+  TLayouts extends Record<string, string> = {},
+  TTags extends Record<string, TagInfo> = {}
+> {
   /**
    * @description
    *
@@ -25,4 +33,12 @@ export interface RootConfig<TLayouts extends Record<string, string> = {}> {
    * @default {}
    */
   layouts?: TLayouts;
+
+  /**
+   * @description
+   *
+   * tags info for which project includes which
+   * @default {}
+   */
+  tags?: TTags;
 }
