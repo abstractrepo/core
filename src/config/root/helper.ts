@@ -1,9 +1,12 @@
-import { RootConfig } from "./types";
+import { RootConfig, TagInfo } from "./types";
 
-export default class RootHelper<TLayouts extends Record<string, string>> {
+export default class RootHelper<
+  TLayouts extends Record<string, string>,
+  TTags extends Record<string, TagInfo>
+> {
   #raw: RootConfig<TLayouts>;
 
-  constructor(raw: RootConfig<TLayouts>) {
+  constructor(raw: RootConfig<TLayouts, TTags>) {
     const config: RootConfig<TLayouts> = {
       basePath: raw.basePath,
       layouts:

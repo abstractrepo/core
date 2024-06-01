@@ -1,4 +1,12 @@
-export interface RootConfig<TLayouts extends Record<string, string> = {}> {
+export interface TagInfo {
+  description: string;
+  docs: string;
+}
+
+export interface RootConfig<
+  TLayouts extends Record<string, string> = {},
+  TTags extends Record<string, TagInfo> = {}
+> {
   /**
    * @description
    *
