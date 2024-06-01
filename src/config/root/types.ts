@@ -33,4 +33,12 @@ export interface RootConfig<
    * @default {}
    */
   layouts?: TLayouts;
+
+  /**
+   * @description
+   *
+   * tags info for which project includes which
+   * @default {}
+   */
+  tags?: TTags;
 }
