@@ -33,6 +33,15 @@ export default class RootHelper<
   /**
    * @description
    *
+   * get layouts object
+   */
+  get getLayoutObject() {
+    return this.#raw.layouts;
+  }
+
+  /**
+   * @description
+   *
    * get monorepo organize
    */
   get getOrganizeName() {

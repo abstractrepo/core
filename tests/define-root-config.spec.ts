@@ -45,6 +45,6 @@ describe("test: `defineRootConfig` should all pass", async () => {
       basePath: import.meta.dirname,
     });
 
-    expectTypeOf(root.raw.layouts).toBeObject;
+    expectTypeOf(root.getLayoutObject).toBeObject;
   });
 });
