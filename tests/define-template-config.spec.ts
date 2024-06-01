@@ -11,9 +11,20 @@ describe("test: `defineTemplateConfig` should pass", () => {
     },
   });
 
-  it.todo("expect: `programmingType` is required", () => {
+  it("expect: `templateCanBeType` is required", () => {
+    expect(() => {
+      /** @ts-expect-error */
+      return defineTemplateConfig({
+        templateCanBeTag: root.getTags([]),
+      });
+    }).toThrowError();
+  });
+
+  it("expect: `templateCanBeTag` is empty array", () => {
     const template = defineTemplateConfig({
-      templateCanBeType: root.getLayouts(["playground", "project"]),
+      templateCanBeType: root.getLayouts(["example"]),
     });
+
+    expectTypeOf(template.getTemplateCanBeTag).toBeArray;
   });
 });
