@@ -21,17 +21,6 @@ export default class RootHelper<TLayouts extends Record<string, string>> {
   /**
    * @description
    *
-   * for check if raw values for test
-   *
-   * @external
-   */
-  get raw() {
-    return this.#raw;
-  }
-
-  /**
-   * @description
-   *
    * check is monorepo using organize
    */
   get isUseOrganize() {
