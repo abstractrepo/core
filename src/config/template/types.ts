@@ -1,5 +1,3 @@
-import { GlobalProgrammingType } from "../../global";
-
 export interface TemplateConfigCommand {
   name: string;
   bash: string;
@@ -11,11 +9,7 @@ export interface TemplateConfigInstallationPackage {
   type: "dependencies" | "devDependencies";
 }
 
-export interface TemplateConfig<
-  TProgramming extends keyof GlobalProgrammingType,
-  TRuntime extends keyof GlobalProgrammingType[TProgramming],
-  TPackageManager extends GlobalProgrammingType[TProgramming][TRuntime]
-> {
+export interface TemplateConfig {
   /**
    * @description
    *
@@ -24,7 +18,7 @@ export interface TemplateConfig<
    *
    * @requires
    */
-  projectType: string | string[];
+  templateCanBeType: string | string[];
 
   /**
    * @description
@@ -34,42 +28,6 @@ export interface TemplateConfig<
    * @default []
    */
   tags?: string[];
-
-  /**
-   * @description
-   *
-   * list of command to add in init file
-   *
-   * @default []
-   */
-  commands?: TemplateConfigCommand[];
-
-  /**
-   * @description
-   *
-   * check which programming type for using which runtime
-   *
-   * @requires
-   */
-  programmingType: TProgramming;
-
-  /**
-   * @description
-   *
-   * check which runtime type for using which package manager
-   *
-   * @requires
-   */
-  runtimeType: TRuntime;
-
-  /**
-   * @description
-   *
-   * check which package manager type for using during installation
-   *
-   * @requires
-   */
-  packageManagerType: TPackageManager;
 
   /**
    * @description
