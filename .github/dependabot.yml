@@ -15,12 +15,12 @@ updates:
       dependencies:
         patterns: 
           - "*"
-        update-type:
+        update-types:
           - "minor"
           - "patch"
       dev-dependencies:
         patterns: 
           - "*"
-        update-type:
+        update-types:
           - "minor"
           - "patch"
