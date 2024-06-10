@@ -1,10 +1,10 @@
 import RootHelper from "./helper";
-import { RootConfig, TagInfo } from "./types";
+import { RootConfig } from "./types";
 
 export default function defineRootConfig<
+  TTags extends string = string,
   TLayouts extends Record<string, string> = {},
-  TTags extends Record<string, TagInfo> = {}
->(config: RootConfig<TLayouts, TTags>) {
+>(config: RootConfig<TTags, TLayouts>) {
   if (!config.basePath) {
     throw new ReferenceError("E_CANNOT_FIND_BASE_PATH: cannot find basepath");
   }
