@@ -16,4 +16,11 @@ export default class TemplateHelper {
 
     return this;
   }
+
+  /**
+   * sometime you want debug when it generate wrong files
+   */
+  get toRaw() {
+    return this.#raw
+  }
 }
