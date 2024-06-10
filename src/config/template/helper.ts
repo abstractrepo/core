@@ -2,13 +2,15 @@ import { withFallback } from "../../utils";
 import { TemplateConfig } from "./types";
 
 export default class TemplateHelper {
-  #raw: TemplateConfig;
+  #raw: Required<TemplateConfig>;
 
   constructor(templateConfig: TemplateConfig) {
-    const config = {
+    const config: Required<TemplateConfig> = {
       ...templateConfig,
-      templateCanBeTag: withFallback(templateConfig.templateCanBeTag, []),
-    } as TemplateConfig;
+      structures: withFallback(templateConfig.structures, []),
+      tags: withFallback(templateConfig.tags, []),
+      types: withFallback(templateConfig.types, [])
+    };
 
     this.#raw = config;
 
@@ -16,16 +18,9 @@ export default class TemplateHelper {
   }
 
   /**
-   * get template that group in project tags
+   * sometime you want debug when it generate wrong files
    */
-  get getTemplateCanBeTag() {
-    return this.#raw.templateCanBeTag;
-  }
-
-  /**
-   * get template that group in project types
-   */
-  get getTemplateCanBeType() {
-    return this.#raw.templateCanBeType;
+  get toRaw() {
+    return this.#raw
   }
 }
