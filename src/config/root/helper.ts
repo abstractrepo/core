@@ -1,77 +1,89 @@
 import { toArray, withFallback } from "../../utils";
-import { RootConfig, TagInfo } from "./types";
+import { RootConfig } from "./types";
 
 export default class RootHelper<
-  TLayouts extends Record<string, string>,
-  TTags extends Record<string, TagInfo>
+  TTags extends string = string,
+  TLayouts extends Record<string, string> = {},
 > {
-  #raw: RootConfig<TLayouts>;
+  #raw: Required<RootConfig<TTags, TLayouts>>;
 
-  constructor(raw: RootConfig<TLayouts, TTags>) {
-    const config: RootConfig<TLayouts> = {
+  constructor(raw: RootConfig<TTags, TLayouts>) {
+    const config: Required<RootConfig<TTags, TLayouts>> = {
       basePath: raw.basePath,
       layouts: withFallback(raw.layouts, {} as TLayouts),
-      organize: undefined,
+      organize: withFallback(raw.organize, null),
+      tags: withFallback(raw.tags, []),
     };
 
-    this.#raw = config;
+    this.#raw = config as Required<RootConfig<TTags, TLayouts>>;
 
     return this;
   }
 
   /**
-   * @description
-   *
-   * check is monorepo using organize
+   * sometimes you want to get `basePath` from RootConfig.
    */
-  get isUseOrganize() {
-    return typeof this.#raw.organize === "string";
+  get getRawBaseRootPath() {
+    return this.#raw.basePath;
   }
 
   /**
-   * @description
-   *
-   * get layouts object
+   * sometimes you want to get `layouts` from RootConfig.
    */
-  get getLayoutObject() {
+  get getRawLayouts() {
     return this.#raw.layouts;
   }
 
   /**
-   * @description
-   *
-   * get monorepo organize
+   * sometimes you want to get `organize` from RootConfig.
    */
-  get getOrganizeName() {
+  get getRawOrganize() {
     return this.#raw.organize;
   }
 
   /**
-   * @description
-   *
-   * let you spcified layouts key that you define in root config
+   * sometimes you want to get `tags` from RootConfig.
    */
-  getLayouts<TLayoutsKey extends keyof TLayouts>(
-    projectType: TLayoutsKey | TLayoutsKey[]
-  ): TLayoutsKey[] {
-    return toArray(projectType);
+  get getRawTags() {
+    return this.#raw.tags;
   }
 
   /**
-   * @description
-   *
-   * let you spcified tags key that you define in root config
+   * an method to get which `layouts` key should in path
    */
-  getTags<TTagsKey extends keyof TTags>(
-    projectTag: TTagsKey | TTagsKey[]
-  ): TTagsKey[] {
-    return toArray(projectTag);
+  getLayoutKeyPath<TLayoutKey extends keyof TLayouts>(
+    key: TLayoutKey,
+  ) {
+    const $key = this.#raw.layouts[key];
+
+    if ($key.startsWith("<base>/")) {
+      return $key.replace(/^\<base\>/s, this.#raw.basePath);
+    }
+
+    if ($key.startsWith("<base_path>/")) {
+      return $key.replace(/^\<base_path\>/s, this.#raw.basePath);
+    }
+
+    if ($key.startsWith("./")) {
+      return $key.replace(/^\./s, this.#raw.basePath);
+    }
+
+    return $key;
   }
 
   /**
-   * to get base path without using raw
+   * an method to get what key contain in `layouts`
    */
-  get baseRootPath() {
-    return this.#raw.basePath;
+  getLayoutsList<TLayoutKey extends keyof TLayouts>(
+    layouts: TLayoutKey | TLayoutKey[]
+  ) {
+    return toArray(layouts);
+  }
+
+  /**
+   * an method to get what contain in `tags`
+   */
+  getTagsList<TTagKey extends TTags>(tags: TTagKey | TTagKey[]) {
+    return toArray(tags);
   }
 }

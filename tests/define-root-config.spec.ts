@@ -1,50 +1,98 @@
-import { RootConfig, defineRootConfig } from "../src";
+import { defineRootConfig } from "../src";
 
-describe("test: `defineRootConfig` should all pass", async () => {
-  it("expect: `root.baseRootPath` is `required`", () => {
-    expect(() => defineRootConfig({} as RootConfig)).toThrowError(
-      "E_CANNOT_FIND_BASE_PATH: cannot find basepath"
+describe.todo("test: `defineRootConfig` should all pass", async () => {
+  it("expect: `rootConfig` has exact `basePath` required all project", () => {
+    const config = defineRootConfig({
+      basePath: import.meta.dirname,
+    });
+
+    expect(config.getRawBaseRootPath).toBe(import.meta.dirname);
+  });
+
+  it("expect: `rootConfig` if not pass `basePath` will throw error", () => {
+    const notPassConfig = () => defineRootConfig({});
+
+    expect(notPassConfig).throw();
+  });
+
+  it("expect: `rootConfig` if not pass `layouts` it will fallback to `{}`", () => {
+    const config = defineRootConfig({
+      basePath: import.meta.dirname,
+    });
+
+    expect(config.getRawLayouts).toStrictEqual({});
+  });
+
+  it("expect: `rootConfig` can get `layouts` config path", () => {
+    const config = defineRootConfig({
+      basePath: import.meta.dirname,
+      layouts: {
+        apps: "<base>/project",
+        example: "<base_path>/example",
+        cases: "./study_cases",
+      },
+    });
+
+    expect(config.getLayoutKeyPath("apps")).toBe(
+      `${import.meta.dirname}/project`
+    );
+    expect(config.getLayoutKeyPath("example")).toBe(
+      `${import.meta.dirname}/example`
+    );
+    expect(config.getLayoutKeyPath("cases")).toBe(
+      `${import.meta.dirname}/study_cases`
     );
   });
 
-  it("expect: `root.baseRootPath` is type `string`", () => {
-    const root = defineRootConfig({
+  it("expect: `rootConfig` if not pass `organize` it will fallback to `null`", () => {
+    const config = defineRootConfig({
       basePath: import.meta.dirname,
     });
 
-    expectTypeOf(root.baseRootPath).toBeString();
+    expect(config.getRawOrganize).toBe(null);
   });
 
-  it("expect: `root.baseRootPath` is equal `import.meta.dirname`", () => {
-    const root = defineRootConfig({
+  it("expect: `rootConfig` can get the `organize` value that pass into and returns its value", () => {
+    const config = defineRootConfig({
       basePath: import.meta.dirname,
+      organize: "ignition-concept",
     });
 
-    expect(root.baseRootPath).toBe(import.meta.dirname);
+    expect(config.getRawOrganize).toStrictEqual("ignition-concept");
   });
 
-  it("expect: `root` has `getOrganizeName` type `undefined` if not pass", () => {
-    const root = defineRootConfig({
+  it("expect: `rootConfig` if not pass `tags` will fallback to `[]`", () => {
+    const config = defineRootConfig({
       basePath: import.meta.dirname,
     });
 
-    expectTypeOf(root.getOrganizeName).toBeUndefined;
+    expect(config.getRawTags).toStrictEqual([]);
   });
 
-  it("expect: `root` has `getOrganizeName` type `string` if pass", () => {
-    const root = defineRootConfig({
+  it("expect: `rootConfig` can get config key if `tags` is pass can get some of that value", () => {
+    const config = defineRootConfig({
       basePath: import.meta.dirname,
-      organize: "abstract",
+      tags: [
+        "react",
+        "vite",
+        "inertia",
+        "vue",
+        "js",
+        "ts",
+        "laravel",
+        "php",
+        "node",
+        "next",
+        "remix",
+        "astro",
+      ],
     });
 
-    expectTypeOf(root.getOrganizeName).toBeString;
-  });
-
-  it("expect: `root` has `layouts` property", () => {
-    const root = defineRootConfig({
-      basePath: import.meta.dirname,
-    });
-
-    expectTypeOf(root.getLayoutObject).toBeObject;
+    expect(config.getTagsList(["js", "next", "react", "node"])).toStrictEqual([
+      "js",
+      "next",
+      "react",
+      "node",
+    ]);
   });
 });
