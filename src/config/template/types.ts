@@ -27,6 +27,13 @@ export interface TemplateConfig {
    * @requires
    */
   runtime: keyof TemplateRuntime,
+
+  /**
+   * an root config `basepath`
+   * 
+   * @requires
+   */
+  rootBasePath: string
 }
 
 export interface TemplateRuntime {
