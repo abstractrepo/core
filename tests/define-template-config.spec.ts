@@ -1,14 +1,15 @@
-import { defineRootConfig } from "../src";
-import { TemplateConfig, defineTemplateConfig } from "../src/config/template";
+import { defineRootConfig } from '../src'
+import type { TemplateConfig } from '../src/config/template'
+import { defineTemplateConfig } from '../src/config/template'
 
-describe.todo("test: `defineTemplateConfig` should pass", () => {
+describe('test: `defineTemplateConfig` should pass', () => {
   const basicRootConfig = defineRootConfig({
-    basePath: import.meta.dirname
+    basePath: import.meta.dirname,
   })
 
   it('expect: `template` config throw error when not passing `runtime`', () => {
     const notPassConfig = () => defineTemplateConfig({
-      rootBasePath: basicRootConfig.baseRootPath
+      rootBasePath: basicRootConfig.getRawBaseRootPath,
     } as TemplateConfig)
 
     expect(notPassConfig).toThrow()
@@ -16,7 +17,7 @@ describe.todo("test: `defineTemplateConfig` should pass", () => {
 
   it('expect: `template` config throw error when not passing `rootBasePath`', () => {
     const notPassConfig = () => defineTemplateConfig({
-      runtime: 'node'
+      runtime: 'node',
     } as TemplateConfig)
 
     expect(notPassConfig).toThrow()
@@ -24,8 +25,8 @@ describe.todo("test: `defineTemplateConfig` should pass", () => {
 
   it('expect: `template` config fallback `structures`', () => {
     const config = defineTemplateConfig({
-      rootBasePath: basicRootConfig.baseRootPath,
-      runtime: 'node'
+      rootBasePath: basicRootConfig.getRawBaseRootPath,
+      runtime: 'node',
     })
 
     expect(config.toRaw.structures).toStrictEqual([])
@@ -33,8 +34,8 @@ describe.todo("test: `defineTemplateConfig` should pass", () => {
 
   it('expect: `template` config fallback `tags`', () => {
     const config = defineTemplateConfig({
-      rootBasePath: basicRootConfig.baseRootPath,
-      runtime: 'node'
+      rootBasePath: basicRootConfig.getRawBaseRootPath,
+      runtime: 'node',
     })
 
     expect(config.toRaw.tags).toStrictEqual([])
@@ -42,10 +43,10 @@ describe.todo("test: `defineTemplateConfig` should pass", () => {
 
   it('expect: `template` config fallback `types`', () => {
     const config = defineTemplateConfig({
-      rootBasePath: basicRootConfig.baseRootPath,
-      runtime: 'node'
+      rootBasePath: basicRootConfig.getRawBaseRootPath,
+      runtime: 'node',
     })
 
     expect(config.toRaw.types).toStrictEqual([])
   })
-});
+})

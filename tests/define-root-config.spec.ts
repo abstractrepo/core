@@ -1,7 +1,7 @@
 import type { RootConfig } from '../src'
 import { defineRootConfig } from '../src'
 
-describe.todo('test: `defineRootConfig` should all pass', async () => {
+describe('test: `defineRootConfig` should all pass', async () => {
   it('expect: `rootConfig` has exact `basePath` required all project', () => {
     const config = defineRootConfig({
       basePath: import.meta.dirname,
