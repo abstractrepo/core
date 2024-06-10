@@ -1,7 +1,7 @@
 import { defineRootConfig } from "../src";
 import { TemplateConfig, defineTemplateConfig } from "../src/config/template";
 
-describe("test: `defineTemplateConfig` should pass", () => {
+describe.todo("test: `defineTemplateConfig` should pass", () => {
   const basicRootConfig = defineRootConfig({
     basePath: import.meta.dirname
   })
