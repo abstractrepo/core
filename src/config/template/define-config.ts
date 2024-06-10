@@ -8,5 +8,11 @@ export default function defineTemplateConfig(templateConfig: TemplateConfig) {
     );
   }
 
+  if (!templateConfig.rootBasePath) {
+    throw new ReferenceError(
+      "E_CANNOT_FIND_ROOT_BASE_PATH: cannot find `rootBasePath` in config"
+    );
+  }
+
   return new TemplateHelper(templateConfig);
 }
