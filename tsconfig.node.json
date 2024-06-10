@@ -9,5 +9,5 @@
     "strict": true,
     "allowJs": true
   },
-  "include": ["vitest.config.ts", "tsup.config.ts", "eslint.config.js"]
+  "include": ["vitest.config.ts", "tsup.config.ts"]
 }
