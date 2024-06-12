@@ -1,8 +1,29 @@
 {
   "name": "abstractrepo",
-  "version": "0.0.0-alpha-8",
   "type": "module",
+  "version": "0.0.1-alpha.2",
   "description": "an monorepo that not compete with other",
+  "author": "SH8GH<samkimhout@gmail.com>",
+  "license": "ISC",
+  "keywords": [
+    "abstract-repo",
+    "monorepo"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js",
+      "node": "./dist/index.js"
+    }
+  },
+  "files": [
+    "LICENSE.md",
+    "README.md",
+    "dist",
+    "package.json"
+  ],
   "scripts": {
     "test": "vitest run --typecheck",
     "dev": "tsup --watch",
@@ -11,20 +32,9 @@
     "prepare": "husky",
     "pre-commit": "lint-staged"
   },
-  "files": [
-    "dist",
-    "package.json",
-    "README.md",
-    "LICENSE.md"
-  ],
-  "exports": {
-    ".": {
-      "default": "./dist/index.js",
-      "import": "./dist/index.js",
-      "node": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
-    }
+  "dependencies": {
+    "@adonisjs/ace": "^13.0.1",
+    "inquirer": "^9.2.23"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.21.0",
@@ -35,21 +45,11 @@
     "eslint-plugin-format": "^0.1.1",
     "globals": "^15.4.0",
     "husky": "^9.0.11",
+    "lint-staged": "^15.2.5",
     "tslib": "^2.6.2",
     "tsup": "^8.0.2",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.12.0",
-    "vitest": "^1.6.0",
-    "lint-staged": "^15.2.5"
-  },
-  "keywords": [
-    "abstract-repo",
-    "monorepo"
-  ],
-  "author": "SH8GH<samkimhout@gmail.com>",
-  "license": "ISC",
-  "dependencies": {
-    "@adonisjs/ace": "^13.0.1",
-    "inquirer": "^9.2.23"
+    "vitest": "^1.6.0"
   }
 }
