@@ -1,15 +1,15 @@
 export interface RootConfig<
   TTags extends string = string,
-  TLayouts extends Record<string, string> = {},
+  TLayouts extends Record<string, string> = Record<string, string>,
 > {
   /**
    * @description
    *
    * for using `<base_path>/[anything]` in `config.repoLayouts`
-   * 
+   *
    * @requires
    */
-  basePath: string;
+  basePath: string
 
   /**
    * @description
@@ -20,7 +20,7 @@ export interface RootConfig<
    *
    * @default null
    */
-  organize?: string|null;
+  organize?: string | null
 
   /**
    * @description
@@ -29,7 +29,7 @@ export interface RootConfig<
    *
    * @default {}
    */
-  layouts?: TLayouts;
+  layouts?: TLayouts
 
   /**
    * @description
@@ -37,5 +37,5 @@ export interface RootConfig<
    * tags info for which project includes which
    * @default undefined
    */
-  tags?: TTags[];
+  tags?: TTags[]
 }

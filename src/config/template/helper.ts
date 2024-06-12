@@ -1,20 +1,20 @@
-import { withFallback } from "../../utils";
-import { TemplateConfig } from "./types";
+import { withFallback } from '../../utils'
+import type { TemplateConfig } from './types'
 
 export default class TemplateHelper {
-  #raw: Required<TemplateConfig>;
+  #raw: Required<TemplateConfig>
 
   constructor(templateConfig: TemplateConfig) {
     const config: Required<TemplateConfig> = {
       ...templateConfig,
       structures: withFallback(templateConfig.structures, []),
       tags: withFallback(templateConfig.tags, []),
-      types: withFallback(templateConfig.types, [])
-    };
+      types: withFallback(templateConfig.types, []),
+    }
 
-    this.#raw = config;
+    this.#raw = config
 
-    return this;
+    return this
   }
 
   /**
