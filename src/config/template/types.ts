@@ -1,3 +1,5 @@
+import type { GlobalRuntime } from '../../utils'
+
 export interface TemplateConfig {
 
   /**
@@ -26,7 +28,7 @@ export interface TemplateConfig {
    *
    * @requires
    */
-  runtime: keyof TemplateRuntime
+  runtime: keyof GlobalRuntime
 
   /**
    * an root config `basepath`
@@ -34,8 +36,4 @@ export interface TemplateConfig {
    * @requires
    */
   rootBasePath: string
-}
-
-export interface TemplateRuntime {
-  node: 'node'
 }

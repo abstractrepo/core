@@ -13,3 +13,7 @@ export function toArray<T>(contain: T | T[]) {
 
   return [...contain]
 }
+
+export interface GlobalRuntime {
+  node: 'node'
+}
