@@ -50,6 +50,7 @@
   "dependencies": {
     "indent-string": "^5.0.0",
     "string-width": "^7.1.0",
-    "terminal-size": "^4.0.0"
+    "terminal-size": "^4.0.0",
+    "wrap-ansi": "^9.0.0"
   }
 }

@@ -17,6 +17,9 @@ importers:
       terminal-size:
         specifier: ^4.0.0
         version: 4.0.0
+      wrap-ansi:
+        specifier: ^9.0.0
+        version: 9.0.0
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^2.21.0
